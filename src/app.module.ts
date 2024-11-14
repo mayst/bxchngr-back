@@ -7,7 +7,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import path from 'path';
+import { User } from './users/users.entity';
 
 @Module({
   imports: [
@@ -39,9 +39,10 @@ import path from 'path';
           username: configService.get('DB_USER'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_NAME'),
-          // entities: [],
-          autoLoadEntities: true,
-          synchronize: true,
+          entities: [__dirname + '/**/*.entity.ts'],
+          // migrations: [],
+          // autoLoadEntities: true,
+          // synchronize: true,
         }
       }
     }),
